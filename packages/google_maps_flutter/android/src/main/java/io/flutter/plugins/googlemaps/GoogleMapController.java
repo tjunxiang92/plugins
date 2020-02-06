@@ -51,6 +51,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.graphics.Typeface;
+
 /** Controller of a single GoogleMaps MapView instance. */
 final class GoogleMapController
     implements Application.ActivityLifecycleCallbacks,
@@ -219,6 +225,36 @@ final class GoogleMapController
     updateInitialPolygons();
     updateInitialPolylines();
     updateInitialCircles();
+
+    // From: https://stackoverflow.com/questions/13904651/android-google-maps-v2-how-to-add-marker-with-multiline-snippet/31629308#31629308
+    googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+      @Override
+      public View getInfoWindow(Marker arg0) {
+        return null;
+      }
+
+      @Override
+      public View getInfoContents(Marker marker) {
+        LinearLayout info = new LinearLayout(context);
+        info.setOrientation(LinearLayout.VERTICAL);
+
+        TextView title = new TextView(context);
+        title.setTextColor(Color.BLACK);
+        title.setGravity(Gravity.CENTER);
+        title.setTypeface(null, Typeface.BOLD);
+        title.setText(marker.getTitle());
+
+        TextView snippet = new TextView(context);
+        snippet.setTextColor(Color.GRAY);
+        snippet.setText(marker.getSnippet());
+
+        info.addView(title);
+        info.addView(snippet);
+
+        return info;
+      }
+    });
   }
 
   @Override
