@@ -328,6 +328,26 @@ final class GoogleMapController
           result.success(null);
           break;
         }
+      case "markers#showInfoWindow":
+        {
+          Object markerId = call.argument("markerId");
+          markersController.showMarkerInfoWindow((String) markerId);
+          result.success(null);
+          break;
+        }
+      case "markers#hideInfoWindow":
+        {
+          Object markerId = call.argument("markerId");
+          markersController.hideMarkerInfoWindow((String) markerId);
+          result.success(null);
+          break;
+        }
+      case "markers#isInfoWindowShown":
+        {
+          Object markerId = call.argument("markerId");
+          result.success(markersController.isInfoWindowShown((String) markerId));
+          break;
+        }
       case "markers#update":
         {
           Object markersToAdd = call.argument("markersToAdd");

@@ -31,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
                               markerId:(NSString*)markerId
                                mapView:(GMSMapView*)mapView;
 - (BOOL)consumeTapEvents;
+- (void)showInfoWindow;
+- (void)hideInfoWindow;
+- (BOOL)isInfoWindowShown;
 - (void)removeMarker;
 @end
 
@@ -44,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)onMarkerTap:(NSString*)markerId;
 - (void)onMarkerDragEnd:(NSString*)markerId coordinate:(CLLocationCoordinate2D)coordinate;
 - (void)onInfoWindowTap:(NSString*)markerId;
+- (void)showMarkerInfoWindow:(NSString*)markerId;
+- (void)hideMarkerInfoWindow:(NSString*)markerId;
+- (BOOL)isMarkerInfoWindowShown:(NSString*)markerId;
 @end
 
 NS_ASSUME_NONNULL_END
